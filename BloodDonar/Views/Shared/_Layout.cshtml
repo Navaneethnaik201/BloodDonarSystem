@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+ <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title-Blood Donar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Reddrop Buddies - Blood Donation Campaign & Multi-Concept Activism Template">
+    <meta name="author" content="xenioushk">
+    <link rel="shortcut icon" href="~/Content/Templet/images/favicon.png" />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- The styles -->
+    <link rel="stylesheet" href="~/Content/Templet/css/bootstrap.min.css" />
+    <link href="~/Content/Templet/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Templet/css/animate.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Templet/css/owl.carousel.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Templet/css/venobox.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="~/Content/Templet/css/styles.css" />
+</head>
+
+    <body>
+
+        <div id="preloader">
+            <span class="margin-bottom"><img src="~/Content/Templet/images/loader.gif" alt="" /></span>
+        </div>
+
+        <!--  HEADER -->
+
+        <header class="main-header clearfix" data-sticky_header="true">
+
+            <div class="top-bar clearfix">
+
+                <div class="container">
+
+                    <div class="row">
+
+                        <div class="col-md-8 col-sm-12">
+
+                            <p>
+                                <span><i class="fa fa-building-o"></i> <strong>Contact: </strong> </span>
+                                <span>&nbsp;<i class="fa fa-phone"></i> <strong>Call Us:</strong> </span>
+                            </p>
+
+                        </div>
+
+                        <div class="col-md-4col-sm-12">
+                            <div class="top-bar-social">
+                                <a href="#"><i class="fa fa-facebook rounded-box"></i></a>
+                                <a href="#"><i class="fa fa-twitter rounded-box"></i></a>
+                                <a href="#"><i class="fa fa-google-plus rounded-box"></i></a>
+                                <a href="#"><i class="fa fa-instagram rounded-box"></i></a>
+                                <a href="#"><i class="fa fa-youtube rounded-box"></i></a>
+                                @if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+                                {
+                                         @Html.ActionLink("Sign In", "Login", "Home", null, new { @class = "btn btn-danger" })
+
+
+                                } else {
+                                       @Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "btn btn-danger" })
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div> <!--  end .container -->
+
+            </div> <!--  end .top-bar  -->
+
+            <section class="header-wrapper navgiation-wrapper">
+
+                <div class="navbar navbar-default">
+                    <div class="container">
+
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="logo" href="index.html"><img alt="" src="~/Content/Templet/images/logo.png"></a>
+                        </div>
+                        @{ 
+                            int usertypeid = 0;
+                            int userid = 0;
+                            string sessionusertype = Convert.ToString(Session["UserTypeID"]);
+                            string userID = Convert.ToString(Session["UserID"]);
+                            int.TryParse(sessionusertype, out usertypeid);
+                            int.TryParse(userID, out userid);
+
+
+                        <div class="navbar-collapse collapse">
+                                                    <ul class="nav navbar-nav navbar-right">
+
+
+
+                                                        <li>
+                                                            <a href="@Url.Content("~/Home/MainHome")" title="Home Layout 01">Home</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="@Url.Content("~/Home/AboutUs")" title="About Us">about us</a>
+                                                        </li>
+                                                        @if(usertypeid!=2){
+                                                        <li>
+                                                            <a href="@Url.Content("~/Finder/FinderDonors/")">Find Donor</a>
+                                                        </li>
+                                                        }
+
+
+
+
+                                                        @if (usertypeid == 1)
+                                                        {
+
+                                                            <li>
+                                                                <a href="@Url.Content("~/Accounts/AllNewUserRequests")" title="About Us"  class="btn btn-theme">Account Request</a>
+
+
+                                                            </li>
+
+                                                        }
+                                                        else if (usertypeid == 4 || usertypeid == 5)
+                                                        {
+                                                            <li>
+                                                                <a href="@Url.Content("~/Finder/ShowAllRequests")" title="All Requests">All Requests</a>
+
+
+                                                            </li>
+
+                                                        }
+                                                        else if (usertypeid == 2 || usertypeid == 5)
+                                                        {
+                                                            <li>
+                                                                <a href="@Url.Content("~/Finder/DonorRequests")" title="All Requests">New Requests</a>
+
+
+                                                            </li>
+
+                                                        }
+                                                        <li>
+                                                            <a href="#">campaign</a>
+                                                            <ul class="drop-down">
+                                                                <li><a href="events.html">All Campaigns</a></li>
+                                                                <li><a href="event-single.html">Single campaign</a></li>
+                                                                @if (usertypeid == 5)
+                                                                {
+                                                                    <li><a href="@Url.Content("~/BloodBank/BloodBankStock")">Stock</a></li>
+
+                                                                }
+                                                            </ul>
+                                                        </li>
+
+
+                                                        @if (usertypeid == 1)
+                                                        {
+                                                            <li>
+                                                                <a href="#">Settings</a>
+                                                                <ul class="drop-down">
+                                                                    <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
+                                                                    <li><a href="@Url.Content("~/AccountStatus/AllAccountStatus")">Account status</a></li>
+                                                                    <li><a href="@Url.Content("~/BloodGroup/AllBloodGroups")">Blood Groups</a></li>
+                                                                    <li><a href="@Url.Content("~/CityTables/Index")">Cities</a></li>
+                                                                    <li><a href="@Url.Content("~/RequestType/AllRequestType")">Request Type</a></li>
+                                                                    <li><a href="@Url.Content("~/UserType/AllUserTypes")">User Type</a></li>
+                                                                    <li><a href="@Url.Content("~/Home/Logout")">Sign Out</a></li>
+
+
+
+                                                                </ul>
+                                                            </li>
+                                                        }
+                                                        else if (usertypeid > 1)
+                                                        {
+                                                            <li>
+                                                                <a href="#">Settings</a>
+                                                                <ul class="drop-down">
+                                                                    <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
+                                                                    <li><a href="@Url.Content("~/Home/Logout")">Sign Out</a></li>
+
+
+
+                                                                </ul>
+                                                            </li>
+
+
+                                                        }
+
+
+                                                    </ul>
+                        </div>
+                            }
+
+                    </div>
+                            
+                </div>
+
+            </section>
+            
+            
+        </header> <!-- end main-header  -->
+        <!-- START FOOTER  -->
+        <div class="container" style="margin-bottom:25px;">
+        @RenderBody();
+        </div>
+
+        
+
+        <!-- END FOOTER  -->
+        <!-- Back To Top Button  -->
+
+        <a id="backTop">Back To Top</a>
+        <script type="text/javascript">
+            @*alert('@ViewData["Message"]');*@
+        </script>
+
+        <script src="~/Content/Templet/js/jquery.min.js"></script>
+        <script src="~/Content/Templet/js/bootstrap.min.js"></script>
+        <script src="~/Content/Templet/js/wow.min.js"></script>
+        <script src="~/Content/Templet/js/jquery.backTop.min.js "></script>
+        <script src="~/Content/Templet/js/waypoints.min.js"></script>
+        <script src="~/Content/Templet/js/waypoints-sticky.min.js"></script>
+        <script src="~/Content/Templet/js/owl.carousel.min.js"></script>
+        <script src="~/Content/Templet/js/jquery.stellar.min.js"></script>
+        <script src="~/Content/Templet/js/jquery.counterup.min.js"></script>
+        <script src="~/Content/Templet/js/venobox.min.js"></script>
+        <script src="~/Content/Templet/js/custom-scripts.js"></script>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<BloodDonar.Models.BloodBankStockMV>
+
+@{
+    ViewBag.Title = "Blood-Bank-Stock";
+}
+
+<div class="col-md-8">
+    <div class="contact-form-block">
+        <h2 class="contact-title">Blood bank Stock</h2>
+        <p>
+            @Html.ActionLink("Add Blood", "AddNewDonorByBloodBank","Accounts", null, new { @class = "btn btn-theme" })
+            @Html.ActionLink("New Campaign", "newCampaign", null, new { @class = "btn btn-theme" })
+            @Html.ActionLink("Campaign  History", "Campaign History", null, new { @class = "btn btn-theme" })
+        </p>
+        <table class="table">
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.BloodGrouup)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BloodGrouup)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Donate", "Edit", new { id = item.BloodBankStockID }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Details History", "Details", new { id = item.BloodBankStockID }, new { @class = "btn btn-info" })
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
